@@ -11,6 +11,8 @@ import ArticleEdit from "../views/ArticleEdit.vue";
 import ArticleList from "../views/ArticleList.vue";
 import AdEdit from "../views/AdEdit.vue";
 import AdList from "../views/AdList.vue";
+import AdminUserEdit from "../views/AdminUserEdit.vue";
+import AdminUserList from "../views/AdminUserList.vue";
 
 Vue.use(VueRouter);
 
@@ -104,6 +106,23 @@ const routes = [
         name: "AdEdit",
         props: true,
         component: AdEdit,
+      },
+      // 管理员管理
+      {
+        path: "/admin_users/create",
+        name: "AdminUserEdit",
+        component: AdminUserEdit,
+      },
+      {
+        path: "/admin_users/list",
+        name: "AdminUserList",
+        component: AdminUserList,
+      },
+      {
+        path: "/admin_users/edit/:id",
+        name: "AdminUserEdit",
+        props: true,
+        component: AdminUserEdit,
       },
     ],
   },
