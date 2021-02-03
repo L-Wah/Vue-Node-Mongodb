@@ -53,6 +53,7 @@ module.exports = (app) => {
   const multer = require("multer");
   // __dirname 总是指向被执行 js 文件的绝对路径
   const upload = multer({ dest: __dirname + "/../../uploads" });
+  // 定义接收的文件路径与名file
   app.post("/admin/api/upload", upload.single("file"), async (req, res) => {
     const file = req.file;
     file.url = `http://localhost:3000/uploads/${file.filename}`;

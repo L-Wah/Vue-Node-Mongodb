@@ -9,6 +9,8 @@ import HeroEdit from "../views/HeroEdit.vue";
 import HeroList from "../views/HeroList.vue";
 import ArticleEdit from "../views/ArticleEdit.vue";
 import ArticleList from "../views/ArticleList.vue";
+import AdEdit from "../views/AdEdit.vue";
+import AdList from "../views/AdList.vue";
 
 Vue.use(VueRouter);
 
@@ -85,6 +87,23 @@ const routes = [
         name: "ArticleEdit",
         props: true,
         component: ArticleEdit,
+      },
+      // 广告位
+      {
+        path: "/ads/create",
+        name: "AdEdit",
+        component: AdEdit,
+      },
+      {
+        path: "/ads/list",
+        name: "AdList",
+        component: AdList,
+      },
+      {
+        path: "/ads/edit/:id",
+        name: "AdEdit",
+        props: true,
+        component: AdEdit,
       },
     ],
   },
