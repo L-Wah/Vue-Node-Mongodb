@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 
+// token的密钥,应放到环境变量里
+app.set("secret", "qaq2333");
+
 app.use(express.json());
 app.use(require("cors")());
 

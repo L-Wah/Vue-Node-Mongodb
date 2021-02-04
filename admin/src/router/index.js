@@ -13,10 +13,13 @@ import AdEdit from "../views/AdEdit.vue";
 import AdList from "../views/AdList.vue";
 import AdminUserEdit from "../views/AdminUserEdit.vue";
 import AdminUserList from "../views/AdminUserList.vue";
+import Login from "../views/Login.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
+  // 登录
+  { path: "/login", name: "login", component: Login, meta: { isPublic: true } },
   {
     path: "/",
     name: "Main",
@@ -131,5 +134,11 @@ const routes = [
 const router = new VueRouter({
   routes,
 });
-
+// 路由守卫;
+router.beforeEach((to, from, next) => {
+  if (!to.meta.isPublic && !sessionStorage.token) {
+    return next("/login");
+  }
+  next();
+});
 export default router;
