@@ -16,6 +16,7 @@
   </div>
 </template>
 <script>
+import session from "../session";
 export default {
   data() {
     return {
@@ -26,7 +27,9 @@ export default {
     async login() {
       const res = await this.$http.post("/login", this.model);
       // console.log(res);
+      // sessionStorage窗口关闭即删除存储
       sessionStorage.token = res.data;
+      session.setItem("AdminName", this.model.username);
       this.$router.push("/");
       this.$message.success("登陆成功");
     },

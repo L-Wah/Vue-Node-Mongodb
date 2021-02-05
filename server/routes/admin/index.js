@@ -63,7 +63,7 @@ module.exports = (app) => {
   // 定义接收的文件路径与名file
   app.post(
     "/admin/api/upload",
-    authMidware,
+    authMidware(),
     upload.single("file"),
     async (req, res) => {
       const file = req.file;

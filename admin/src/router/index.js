@@ -19,6 +19,7 @@ Vue.use(VueRouter);
 
 const routes = [
   // 登录
+  // meta: { isPublic: true } 全部页面都需要授权
   { path: "/login", name: "login", component: Login, meta: { isPublic: true } },
   {
     path: "/",
@@ -134,7 +135,7 @@ const routes = [
 const router = new VueRouter({
   routes,
 });
-// 路由守卫;
+// 路由守卫; beforeEach全局前置守卫
 router.beforeEach((to, from, next) => {
   if (!to.meta.isPublic && !sessionStorage.token) {
     return next("/login");

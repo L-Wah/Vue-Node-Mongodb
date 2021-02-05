@@ -1,15 +1,10 @@
 <template>
   <el-container style="height: 100vh">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-      <!-- default-openeds控制默认展开哪个 -->
+      <!-- default-openeds="['1']"控制默认展开哪个 -->
       <!-- unique-opened 一次打开一个 -->
       <!-- :default-active 根据路由高亮 -->
-      <el-menu
-        router
-        :default-openeds="['3']"
-        unique-opened
-        :default-active="$route.path"
-      >
+      <el-menu router unique-opened :default-active="$route.path">
         <el-submenu index="1">
           <template slot="title"
             ><i class="el-icon-message"></i>内容管理</template
@@ -60,15 +55,14 @@
 
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
-        <el-dropdown>
+        <el-dropdown @command="handleCommand">
           <i class="el-icon-setting" style="margin-right: 15px"></i>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>查看</el-dropdown-item>
-            <el-dropdown-item>新增</el-dropdown-item>
-            <el-dropdown-item>删除</el-dropdown-item>
+            <el-dropdown-item command="see">查看</el-dropdown-item>
+            <el-dropdown-item command="add">新增</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <span>王小虎</span>
+        <span>{{ name }}</span>
       </el-header>
 
       <el-main>
@@ -91,16 +85,36 @@
 </style>
 
 <script>
+import session from "../session";
 export default {
   data() {
-    const item = {
-      date: "2016-05-02",
-      name: "王小虎",
-      address: "上海市普陀区金沙江路 1518 弄",
-    };
     return {
-      tableData: Array(20).fill(item),
+      name: "",
     };
+  },
+  mounted() {
+    if (!this.name) {
+      console.log("object");
+      this.name = session.getItem("AdminName");
+    }
+  },
+  methods: {
+    handleCommand(command) {
+      // router.push 或 router.replace 中提供 onComplete 和 onAbort 回调作为第二个和第三个参数。这些回调将会在导航成功完成 (在所有的异步钩子被解析之后) 或终止 (导航到相同的路由、或在当前导航完成之前导航到另一个不同的路由) 的时候进行相应的调用。
+      if (command == "see") {
+        this.$router.push(
+          { path: "/admin_users/list" },
+          (onComplete) => {},
+          (onAbort) => {}
+        );
+      } else {
+        this.$router.push(
+          { path: "/admin_users/create" },
+          (onComplete) => {},
+          (onAbort) => {}
+        );
+      }
+    },
   },
 };
 </script>

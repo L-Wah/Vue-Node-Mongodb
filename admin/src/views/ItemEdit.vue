@@ -14,8 +14,9 @@
       <el-form-item label="图标">
         <el-upload
           class="avatar-uploader"
-          :action="$http.defaults.baseURL + '/upload'"
           :show-file-list="false"
+          :headers="getAuthHeaders()"
+          :action="$http.defaults.baseURL + '/upload'"
           :on-success="afterUpload"
         >
           <img v-if="model.icon" :src="model.icon" class="avatar" />
@@ -57,7 +58,7 @@ export default {
       this.model = res.data;
     },
     afterUpload(res) {
-      // console.log(res);
+      console.log(res);
       this.$set(this.model, "icon", res.url);
       this.model.icon = res.url;
     },
