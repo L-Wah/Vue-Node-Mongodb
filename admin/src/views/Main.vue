@@ -66,7 +66,8 @@
       </el-header>
 
       <el-main>
-        <router-view></router-view>
+        <!-- 显示子路由，默认以组件区分，组件相同需要加:key，以路由路径区分 -->
+        <router-view :key="$route.path"></router-view>
       </el-main>
     </el-container>
   </el-container>
@@ -94,7 +95,6 @@ export default {
   },
   mounted() {
     if (!this.name) {
-      console.log("object");
       this.name = session.getItem("AdminName");
     }
   },

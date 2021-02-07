@@ -11,4 +11,6 @@ module.exports = (app) => {
     .catch((err) => {
       console.log(err);
     });
+
+  require('require-all')(__dirname + '/../models')
 };

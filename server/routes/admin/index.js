@@ -44,17 +44,11 @@ module.exports = (app) => {
     if (req.Model.modelName === "Category") {
       queryOptions.populate = "parent";
     }
-    const items = await req.Model.find().setOptions(queryOptions).limit(10);
+    const items = await req.Model.find().setOptions(queryOptions).limit(100);
     res.send(items);
   });
   // 资源中间件
   const resourceMidware = require("../../middleware/resource");
-  app.use(
-    "/admin/api/rest/:resource",
-    authMidware(),
-    resourceMidware(),
-    router
-  );
 
   // 中间件：用于上传文件  npm i multer
   const multer = require("multer");
@@ -104,6 +98,13 @@ module.exports = (app) => {
       next(error);
     }
   });
+  app.use(
+    // 动态匹配url
+    "/admin/api/rest/:resource",
+    authMidware(),
+    resourceMidware(),
+    router
+  );
   // 错误处理逻辑
   app.use((error, req, res, next) => {
     //发送使用assert语句传入的状态码和错误提示信息

@@ -81,6 +81,7 @@
           <span class="flex-1 text-dark-1 text-ellipsis pr-2">{{
             news.title
           }}</span>
+          <!-- 过滤器 对news.createdAt数据按照 date方法过滤-->
           <span class="text-grey-1 fs-sm">{{ news.createdAt | date }}</span>
         </router-link>
       </template>
@@ -134,10 +135,12 @@ export default {
     async fetchNewsCats() {
       const res = await this.$http.get("news/list");
       this.newsCats = res.data;
+      console.log(res.data)
     },
     async fetchHeroCats() {
       const res = await this.$http.get("heroes/list");
       this.heroCats = res.data;
+      console.log(res.data)
     },
     show() {
       this.more = !this.more;

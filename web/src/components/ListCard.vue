@@ -1,5 +1,6 @@
 <template>
   <m-card :icon="icon" :title="title">
+    <!-- 标签名 -->
     <div class="nav jc-between">
       <div class="nav-item" :class="{active: active === i}"
       v-for="(category, i) in categories" :key="i"
@@ -7,6 +8,7 @@
         <div class="nav-link">{{category.name}}</div>
       </div>
     </div>
+    <!-- 内容 -->
     <div class="pt-3">
       <swiper ref="list" :options="{autoHeight: true}"
       @slide-change="() => active = $refs.list.swiper.realIndex">
