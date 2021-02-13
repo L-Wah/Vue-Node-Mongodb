@@ -34,9 +34,7 @@ export default {
   },
   data() {
     return {
-      model: {
-        items: [],
-      },
+      model: {},
     };
   },
   methods: {

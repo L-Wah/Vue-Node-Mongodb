@@ -9,7 +9,7 @@ const schema = new mongoose.Schema({
     difficult: { type: Number },
     skills: { type: Number },
     attack: { type: Number },
-    survive: { type: Number },
+    survive: { type: Number }, 
   },
   skills: [
     {
@@ -34,4 +34,5 @@ const schema = new mongoose.Schema({
     },
   ],
 });
-module.exports = mongoose.model("Hero", schema);
+// 使用mongoosejs连接数据库新建的collection若非以s结尾，会自动加上s，可加上第三个参数，自定义数据库中模型的名字
+module.exports = mongoose.model("Hero", schema,"heroes");

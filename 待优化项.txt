@@ -2,3 +2,5 @@
 
 登录后根据用户名改变右上角的名称（ok）--（session）
 web端 展开收起完成效果（ok）--（:class）
+
+登陆时若第一次进入需要在数据库创建一个默认账号(admin,123456) -- (AdminUser.create(admin))
