@@ -59,6 +59,7 @@
 
               <!-- skills -->
               <div class="skills bg-white mt-4">
+                <!-- 技能图标 -->
                 <div class="d-flex jc-around">
                   <img
                     class="icon"
@@ -69,6 +70,7 @@
                     :key="item.name"
                   />
                 </div>
+                <!-- 技能描述 -->
                 <div v-if="currentSkill">
                   <div class="d-flex pt-4 pb-3">
                     <h3 class="m-0">{{ currentSkill.name }}</h3>
@@ -139,6 +141,7 @@ export default {
     };
   },
   computed: {
+    // computed中,currentSkill返回了一个对象,可以直接使用currentSkill对象中的属性
     currentSkill() {
       return this.model.skills[this.currentSkillIndex];
     },
@@ -147,6 +150,7 @@ export default {
     async fetch() {
       const res = await this.$http.get(`heroes/${this.id}`);
       this.model = res.data;
+      console.log(this.model);
     },
   },
   created() {
