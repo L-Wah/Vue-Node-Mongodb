@@ -8,10 +8,9 @@ module.exports = (app) => {
   // 需加入错误处理逻辑 且 不能有异步操作 async await
   const assert = require("http-assert");
   const router = express.Router({
-    // 保留来自父路由器的req.params值
+    // 合并参数
     mergeParams: true,
   });
-  //子路由
   // 创建
   router.post("/", async (req, res) => {
     console.log(req.body);
@@ -72,22 +71,18 @@ module.exports = (app) => {
     const { username, password } = req.body;
 
     // 加入判断，是否第一次登陆
-    if (await AdminUser.find({}).countDocuments() == 0) {
+    if ((await AdminUser.find({}).countDocuments()) == 0) {
       console.log("初始化用户");
       const admin = { username: "admin", password: "123456" };
-      new Promise( function (resolve, reject) {
-        AdminUser.create(admin);
-        console.log("已创建用户admin");
-        resolve( 
-          setTimeout(()=>{
-            denglu()
-          },0)
-        );
-      })
-    }else{
-      denglu()
+      AdminUser.create(admin);
+      console.log("已创建用户admin");
+      setTimeout(() => {
+        denglu();
+      }, 0);
+    } else {
+      denglu();
     }
-    async function denglu(){
+    async function denglu() {
       // const AdminUser = require("../../models/AdminUser");
       // if (!user) {
       //   // 设置状态码422;
@@ -96,7 +91,7 @@ module.exports = (app) => {
       //   });
       // }
       const user = await AdminUser.findOne({ username }).select("+password");
-      console.log(user)
+      console.log(user);
       try {
         assert(user, 422, "用户不存在");
         assert(password, 422, "请输入密码");
@@ -125,7 +120,7 @@ module.exports = (app) => {
     resourceMidware(),
     router
   );
-  // 错误处理逻辑
+  // 错误处理函数
   app.use((error, req, res, next) => {
     //发送使用assert语句传入的状态码和错误提示信息
     res.status(error.statusCode || 500).send({

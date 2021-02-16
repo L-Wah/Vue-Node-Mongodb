@@ -241,8 +241,9 @@ export default {
     },
     async fetch() {
       const res = await this.$http.get(`rest/heroes/${this.id}`);
+      console.log(res.data);
       // this.model = res.data;
-      // 对象合并，Object.assign(),同名覆盖，不同名添加
+      // 对象合并，Object.assign(),同名最后面的属性会覆盖前面的属性，不同名添加，最后面没有而前面有的会保留下来
       this.model = Object.assign({}, this.model, res.data);
     },
     async fetchCategories() {

@@ -30,7 +30,7 @@
     <!-- end of swiper -->
 
     <div class="nav-icons bg-white mt-3 text-center pt-3 text-dark-1">
-      <div class="d-flex flex-wrap _height" :class="{ _height1:more }">
+      <div class="d-flex flex-wrap _height" :class="{ _height1: more }">
         <!-- <div class="nav-item mb-3" v-for="n in 10" :key="n"> -->
         <div class="nav-item mb-3">
           <i class="sprite sprite-news"></i>
@@ -58,10 +58,7 @@
         </div>
       </div>
       <div class="bg-light py-2 fs-sm" @click="show">
-        <i
-          class="sprite sprite-arrow mr-1"
-          :class="{  spriteArrow : more }"
-        ></i>
+        <i class="sprite sprite-arrow mr-1" :class="{ spriteArrow: more }"></i>
         <span>{{ more ? "收起" : "展开" }}</span>
       </div>
     </div>
@@ -78,9 +75,7 @@
         >
           <span class="text-info">[{{ news.categoryName }}]</span>
           <span class="px-2">|</span>
-          <span class="flex-1 text-dark-1 text-ellipsis pr-2">{{
-            news.title
-          }}</span>
+          <span class="flex-1 text-dark-1 text-ellipsis pr-2">{{ news.title }}</span>
           <!-- 过滤器 对news.createdAt数据按照 date方法过滤-->
           <span class="text-grey-1 fs-sm">{{ news.createdAt | date }}</span>
         </router-link>
@@ -121,6 +116,7 @@ export default {
   },
   data() {
     return {
+      // 轮播图的小点点
       swiperOption: {
         pagination: {
           el: ".pagination-home",
@@ -135,12 +131,12 @@ export default {
     async fetchNewsCats() {
       const res = await this.$http.get("news/list");
       this.newsCats = res.data;
-      console.log(res.data)
+      console.log(res.data);
     },
     async fetchHeroCats() {
       const res = await this.$http.get("heroes/list");
       this.heroCats = res.data;
-      console.log(res.data)
+      console.log(res.data);
     },
     show() {
       this.more = !this.more;

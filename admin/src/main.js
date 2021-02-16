@@ -6,6 +6,7 @@ import router from "./router";
 Vue.config.productionTip = false;
 import "./style.css";
 import http from "./http";
+Vue.prototype.$http = http;
 
 // 全局使用的代码块  computed计算属性，getAuthHeaders方法属性
 Vue.mixin({
@@ -24,7 +25,6 @@ Vue.mixin({
   },
 });
 
-Vue.prototype.$http = http;
 new Vue({
   router,
   render: (h) => h(App),

@@ -26,7 +26,7 @@ http.interceptors.response.use(
   },
   (err) => {
     if (err.response.status === 401) {
-      router.push("/login");
+      this.$router.push("/login");
     }
     Vue.prototype.$message.error(err.response.data.message);
     return Promise.reject(err);
