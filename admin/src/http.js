@@ -14,11 +14,9 @@ http.interceptors.request.use(
       // console.log(config.headers.Authorization);
     }
     return config;
-  },
-  function(error) {
-    return Promise.reject(error);
-  }
-);
+  }, error => {
+    return Promise.reject(error)
+});
 // response响应拦截
 http.interceptors.response.use(
   (res) => {

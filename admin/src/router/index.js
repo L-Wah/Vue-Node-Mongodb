@@ -137,6 +137,11 @@ const routes = [
 const router = new VueRouter({
   routes,
 });
+const VueRouterPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push (to) {
+  return VueRouterPush.call(this, to).catch(err => err)
+}
+
 // 路由守卫; beforeEach全局前置守卫
 router.beforeEach((to, from, next) => {
   if (!to.meta.isPublic && !sessionStorage.token) {

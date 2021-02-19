@@ -20,7 +20,9 @@
                     style="margin: 0px auto; cursor: pointer; margin-left: 20px"
                   />
                 </router-link>
-                <div style="font-size: 12px; margin-top: 5px; margin-left: 25px">
+                <div
+                  style="font-size: 12px; margin-top: 5px; margin-left: 25px"
+                >
                   英雄列表
                 </div>
               </div>
@@ -35,7 +37,9 @@
                     style="cursor: pointer; margin-left: 20px"
                   />
                 </router-link>
-                <div style="font-size: 12px; margin-top: 5px; margin-left: 25px">
+                <div
+                  style="font-size: 12px; margin-top: 5px; margin-left: 25px"
+                >
                   广告列表
                 </div>
               </div>
@@ -50,7 +54,9 @@
                     style="cursor: pointer; margin-left: 20px"
                   />
                 </router-link>
-                <div style="font-size: 12px; margin-top: 5px; margin-left: 25px">
+                <div
+                  style="font-size: 12px; margin-top: 5px; margin-left: 25px"
+                >
                   分类列表
                 </div>
               </div>
@@ -85,19 +91,20 @@
                 <img :src="item" alt="" style="width: 100%" />
               </el-carousel-item>
             </el-carousel>
+            <el-divider></el-divider>
             <aplayer
               style="margin-top: 20px; margin-bottom: 30px"
               autoplay
               :music="{
                 title: '给我一个理由忘记',
                 artist: 'A-Lin',
-                src: 'http://music.163.com/song/media/outer/url?id=25640799.mp3',
+                src:
+                  'http://music.163.com/song/media/outer/url?id=25640799.mp3',
                 pic:
                   'http://p2.music.126.net/0POVOSSjqgVoOUGc5haWBQ==/109951163392311918.jpg',
               }"
               :list="musicList"
             ></aplayer>
-            <el-divider></el-divider>
           </el-card>
           <!-- <el-calendar :v-model="new Date()"></el-calendar> -->
         </div>
@@ -120,23 +127,74 @@ export default {
           lrc: "",
           title: "Airplanes",
           src: "http://music.163.com/song/media/outer/url?id=26714821.mp3",
-          pic: "http://p4.music.126.net/H9HJibEzTL34aIT6nsqKsQ==/5682276092402519.jpg",
+          pic:
+            "http://p4.music.126.net/H9HJibEzTL34aIT6nsqKsQ==/5682276092402519.jpg",
         },
       ],
       carousel: [
         "http://myforum.oss-cn-beijing.aliyuncs.com/postImages/1582867606734617c9668-8086-4c9b-867e-efda0bff78d63.png?Expires=1677475607&OSSAccessKeyId=LTAI4FsV5R1tnt8W8kqFqBYh&Signature=3xKM18EXDDD%2BQmsg%2B0t7uDC%2FMGg%3D",
         "http://myforum.oss-cn-beijing.aliyuncs.com/postImages/15828676585536f809b01-a5c3-4229-8ce6-ed29a7bdaaa22.png?Expires=1677475658&OSSAccessKeyId=LTAI4FsV5R1tnt8W8kqFqBYh&Signature=k2fJfFzwKwp7f2c%2BRD7rdH%2FAj%2Bs%3D",
       ],
+      xData: [],
+      yData: [],
+      myData: [],
+      value: new Date(),
     };
   },
   methods: {
     /**
      * 加载登入报表数据
      */
-    async loginReport(username) {
-      const { data: res } = await this.$http.post("system/loginLog/loginReport", {
-        username: "蔡徐坤",
-      });
+    async loginReport() {
+      const res = {
+        success: true,
+        data: {
+          all: [
+            { count: 54, days: "01-31" },
+            { count: 84, days: "02-01" },
+            { count: 87, days: "02-02" },
+            { count: 114, days: "02-03" },
+            { count: 71, days: "02-04" },
+            { count: 59, days: "02-05" },
+            { count: 46, days: "02-06" },
+            { count: 57, days: "02-07" },
+            { count: 55, days: "02-08" },
+            { count: 58, days: "02-09" },
+            { count: 17, days: "02-10" },
+            { count: 10, days: "02-11" },
+            { count: 13, days: "02-12" },
+            { count: 21, days: "02-13" },
+            { count: 24, days: "02-14" },
+            { count: 27, days: "02-15" },
+            { count: 32, days: "02-16" },
+            { count: 25, days: "02-17" },
+            { count: 56, days: "02-18" },
+            { count: 58, days: "02-19" },
+          ],
+          me: [
+            { count: 54, days: "01-31" },
+            { count: 84, days: "02-01" },
+            { count: 87, days: "02-02" },
+            { count: 113, days: "02-03" },
+            { count: 71, days: "02-04" },
+            { count: 59, days: "02-05" },
+            { count: 46, days: "02-06" },
+            { count: 57, days: "02-07" },
+            { count: 55, days: "02-08" },
+            { count: 57, days: "02-09" },
+            { count: 17, days: "02-10" },
+            { count: 10, days: "02-11" },
+            { count: 13, days: "02-12" },
+            { count: 21, days: "02-13" },
+            { count: 24, days: "02-14" },
+            { count: 27, days: "02-15" },
+            { count: 32, days: "02-16" },
+            { count: 25, days: "02-17" },
+            { count: 56, days: "02-18" },
+            { count: 58, days: "02-19" },
+          ],
+        },
+      };
       if (!res.success) {
         return this.$message.error("获取登入报表数据失败:" + res.msg);
       } else {
@@ -165,9 +223,6 @@ export default {
       this.draw();
     },
 
-    /**
-     * 绘制登入报表
-     */
     draw() {
       const myChart = echarts.init(document.getElementById("loginReport"));
       // 指定图表的配置项和数据
@@ -235,7 +290,7 @@ export default {
     },
   },
   mounted: function () {
-    this.draw();
+    this.loginReport();
   },
 };
 </script>
