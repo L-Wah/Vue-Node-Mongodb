@@ -14,12 +14,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="名称">
-        <el-input
-          placeholder=""
-          v-model="model.name"
-          size="normal"
-          clearable
-        ></el-input>
+        <el-input placeholder="" v-model="model.name" size="normal" clearable></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">保存</el-button>

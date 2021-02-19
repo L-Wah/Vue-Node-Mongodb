@@ -8,10 +8,9 @@ module.exports = (app) => {
   // 需加入错误处理逻辑 且 不能有异步操作 async await
   const assert = require("http-assert");
   const router = express.Router({
-    // 保留来自父路由器的req.params值
+    // 合并参数
     mergeParams: true,
   });
-  //子路由
   // 创建
   router.post("/", async (req, res) => {
     console.log(req.body);
@@ -70,32 +69,48 @@ module.exports = (app) => {
   app.post("/admin/api/login", async (req, res, next) => {
     console.log(req.body);
     const { username, password } = req.body;
-    const user = await AdminUser.findOne({ username }).select("+password");
-    // const AdminUser = require("../../models/AdminUser");
-    // if (!user) {
-    //   // 设置状态码422;
-    //   return res.status(422).send({
-    //     message: "用户不存在",
-    //   });
-    // }
-    try {
-      assert(user, 422, "用户不存在");
-      assert(password, 422, "请输入密码");
-      // compareSync比较必须保证两个参数不为空且不是undefined
-      const isValid = require("bcrypt").compareSync(password, user.password);
-      // if (!isValid) {
+
+    // 加入判断，是否第一次登陆
+    if ((await AdminUser.find({}).countDocuments()) == 0) {
+      console.log("初始化用户");
+      const admin = { username: "admin", password: "123456" };
+      AdminUser.create(admin);
+      console.log("已创建用户admin");
+      setTimeout(() => {
+        denglu();
+      }, 0);
+    } else {
+      denglu();
+    }
+    async function denglu() {
+      // const AdminUser = require("../../models/AdminUser");
+      // if (!user) {
+      //   // 设置状态码422;
       //   return res.status(422).send({
-      //     message: "密码错误",
+      //     message: "用户不存在",
       //   });
       // }
-      assert(isValid, 422, "密码错误");
-      // sign签名（要加密的数据（对象），密钥））
-      // get 里面只有一个参数，表示获取环境变量 ，多个参数则是表示路由
-      const token = jwt.sign({ id: user._id }, app.get("secret"));
-      res.send(token);
-    } catch (error) {
-      console.log(error);
-      next(error);
+      const user = await AdminUser.findOne({ username }).select("+password");
+      console.log(user);
+      try {
+        assert(user, 422, "用户不存在");
+        assert(password, 422, "请输入密码");
+        // compareSync比较必须保证两个参数不为空且不是undefined
+        const isValid = require("bcrypt").compareSync(password, user.password);
+        // if (!isValid) {
+        //   return res.status(422).send({
+        //     message: "密码错误",
+        //   });
+        // }
+        assert(isValid, 422, "密码错误");
+        // sign签名（要加密的数据（对象），密钥））
+        // get 里面只有一个参数，表示获取环境变量 ，多个参数则是表示路由
+        const token = jwt.sign({ id: user._id }, app.get("secret"));
+        res.send(token);
+      } catch (error) {
+        console.log(error);
+        next(error);
+      }
     }
   });
   app.use(
@@ -105,7 +120,7 @@ module.exports = (app) => {
     resourceMidware(),
     router
   );
-  // 错误处理逻辑
+  // 错误处理函数
   app.use((error, req, res, next) => {
     //发送使用assert语句传入的状态码和错误提示信息
     res.status(error.statusCode || 500).send({

@@ -8,12 +8,7 @@
     <!-- @submit.native.prevent 原生form表单prevent阻止跳转页面 -->
     <el-form label-width="120px" @submit.native.prevent="save">
       <el-form-item label="名称">
-        <el-input
-          placeholder=""
-          v-model="model.name"
-          size="normal"
-          clearable
-        ></el-input>
+        <el-input placeholder="" v-model="model.name" size="normal" clearable></el-input>
       </el-form-item>
       <el-form-item label="图标">
         <el-upload
@@ -45,11 +40,10 @@ export default {
   },
   methods: {
     async save() {
-      let res;
       if (this.id) {
-        res = await this.$http.put(`rest/items/${this.id}`, this.model);
+        await this.$http.put(`rest/items/${this.id}`, this.model);
       } else {
-        res = await this.$http.post("rest/items", this.model);
+        await this.$http.post("rest/items", this.model);
       }
       this.$router.push("/items/list");
       this.$message({
@@ -64,7 +58,7 @@ export default {
     afterUpload(res) {
       console.log(res);
       this.$set(this.model, "icon", res.url);
-      this.model.icon = res.url;
+      // this.model.icon = res.url;
     },
   },
   created() {
