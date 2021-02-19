@@ -14,6 +14,7 @@ import AdList from "../views/AdList.vue";
 import AdminUserEdit from "../views/AdminUserEdit.vue";
 import AdminUserList from "../views/AdminUserList.vue";
 import Login from "../views/Login.vue";
+import Home from "../views/Home.vue"
 
 Vue.use(VueRouter);
 
@@ -26,6 +27,7 @@ const routes = [
     name: "Main",
     component: Main,
     children: [
+      { path: '/', name: 'home', component: Home },
       // 分类
       {
         path: "/categories/create",

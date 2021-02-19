@@ -100,6 +100,7 @@ export default {
   },
   methods: {
     handleCommand(command) {
+      //解决点击到相同url后报错
       // router.push 或 router.replace 中提供 onComplete 和 onAbort 回调作为第二个和第三个参数。这些回调将会在导航成功完成 (在所有的异步钩子被解析之后) 或终止 (导航到相同的路由、或在当前导航完成之前导航到另一个不同的路由) 的时候进行相应的调用。
       if (command == "see") {
         this.$router.push(

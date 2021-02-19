@@ -1,5 +1,9 @@
 <template>
   <div class="about">
+    <el-breadcrumb separator="/" style="padding-bottom: 10px; font-size: 12px">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>英雄列表</el-breadcrumb-item>
+    </el-breadcrumb>
     <h1>英雄列表</h1>
     <el-table :data="items">
       <el-table-column prop="_id" label="ID" width="230"> </el-table-column>

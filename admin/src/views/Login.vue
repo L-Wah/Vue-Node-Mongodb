@@ -9,22 +9,43 @@
           <el-input v-model="model.password" type="password"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" native-type="submit">登录</el-button>
+          <el-button type="primary" native-type="submit" :loading="loading"
+            >登录</el-button
+          >
         </el-form-item>
       </el-form>
+      <!-- 验证码 -->
+      <Vcode
+        :show="isShow"
+        @success="success"
+        @close="close"
+        :canvasWidth="500"
+        :canvasHeight="350"
+      />
     </el-card>
   </div>
 </template>
 <script>
 import session from "../session";
+import Vcode from "vue-puzzle-vcode";
 export default {
   data() {
     return {
       model: {},
+      isShow: false,
+      loading: false,
     };
+  },
+  components: {
+    Vcode,
   },
   methods: {
     async login() {
+      this.isShow = true;
+    },
+    //验证成功
+    async success() {
+      this.loading = true;
       const res = await this.$http.post("/login", this.model);
       // console.log(res);
       // sessionStorage窗口关闭即删除存储
@@ -32,6 +53,9 @@ export default {
       session.setItem("AdminName", this.model.username);
       this.$router.push("/");
       this.$message.success("登陆成功");
+    },
+    close() {
+      this.isShow = false;
     },
   },
 };

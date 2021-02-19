@@ -1,5 +1,9 @@
 <template>
   <div class="about">
+    <el-breadcrumb separator="/" style="padding-bottom: 10px; font-size: 12px">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>新建物品</el-breadcrumb-item>
+    </el-breadcrumb>
     <h1>{{ id ? "编辑" : "新建" }}分类</h1>
     <!-- @submit.native.prevent 原生form表单prevent阻止跳转页面 -->
     <el-form label-width="120px" @submit.native.prevent="save">
