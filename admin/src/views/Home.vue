@@ -107,7 +107,7 @@
 </template>
 <script>
 import aplayer from "vue-aplayer";
-import echarts from "echarts";
+import * as echarts from "echarts";
 export default {
   components: {
     aplayer: aplayer,
