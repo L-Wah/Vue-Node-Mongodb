@@ -9,9 +9,7 @@
           <el-input v-model="model.password" type="password"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" native-type="submit" :loading="loading"
-            >登录</el-button
-          >
+          <el-button type="primary" native-type="submit">登录</el-button>
         </el-form-item>
       </el-form>
       <!-- 验证码 -->
@@ -33,7 +31,6 @@ export default {
     return {
       model: {},
       isShow: false,
-      loading: false,
     };
   },
   components: {
@@ -45,14 +42,16 @@ export default {
     },
     //验证成功
     async success() {
-      this.loading = true;
-      const res = await this.$http.post("/login", this.model);
-      // console.log(res);
-      // sessionStorage窗口关闭即删除存储
-      sessionStorage.token = res.data;
-      session.setItem("AdminName", this.model.username);
-      this.$router.push("/");
-      this.$message.success("登陆成功");
+      try {
+        const res = await this.$http.post("/login", this.model);
+        // sessionStorage窗口关闭即删除存储
+        sessionStorage.token = res.data;
+        session.setItem("AdminName", this.model.username);
+        this.$router.push("/");
+        this.$message.success("登陆成功");
+      } catch (error) {
+        this.isShow = false;
+      }
     },
     close() {
       this.isShow = false;
