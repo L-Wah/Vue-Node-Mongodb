@@ -20,9 +20,7 @@
                     style="margin: 0px auto; cursor: pointer; margin-left: 20px"
                   />
                 </router-link>
-                <div
-                  style="font-size: 12px; margin-top: 5px; margin-left: 25px"
-                >
+                <div style="font-size: 12px; margin-top: 5px; margin-left: 25px">
                   英雄列表
                 </div>
               </div>
@@ -37,9 +35,7 @@
                     style="cursor: pointer; margin-left: 20px"
                   />
                 </router-link>
-                <div
-                  style="font-size: 12px; margin-top: 5px; margin-left: 25px"
-                >
+                <div style="font-size: 12px; margin-top: 5px; margin-left: 25px">
                   广告列表
                 </div>
               </div>
@@ -54,9 +50,7 @@
                     style="cursor: pointer; margin-left: 20px"
                   />
                 </router-link>
-                <div
-                  style="font-size: 12px; margin-top: 5px; margin-left: 25px"
-                >
+                <div style="font-size: 12px; margin-top: 5px; margin-left: 25px">
                   分类列表
                 </div>
               </div>
@@ -78,7 +72,7 @@
           </el-card>
           <el-card class="box-card" style="margin-top: 20px; padding: 0px">
             <!-- 用户登入报表 -->
-            <div id="loginReport" style="width: 650px; height: 270px"></div>
+            <div id="loginReport" style="width: 530px; height: 270px"></div>
           </el-card>
         </el-row>
       </el-col>
@@ -88,7 +82,7 @@
           <el-card>
             <el-carousel height="180px">
               <el-carousel-item v-for="(item, i) in carousel" :key="i">
-                <img :src="item" alt="" style="width: 100%" />
+                <img :src="item" alt="" style="object-fit: contain; width: 100%" />
               </el-carousel-item>
             </el-carousel>
             <el-divider></el-divider>
@@ -98,8 +92,7 @@
               :music="{
                 title: '给我一个理由忘记',
                 artist: 'A-Lin',
-                src:
-                  'http://music.163.com/song/media/outer/url?id=25640799.mp3',
+                src: 'http://music.163.com/song/media/outer/url?id=25640799.mp3',
                 pic:
                   'http://p2.music.126.net/0POVOSSjqgVoOUGc5haWBQ==/109951163392311918.jpg',
               }"
@@ -127,8 +120,7 @@ export default {
           lrc: "",
           title: "Airplanes",
           src: "http://music.163.com/song/media/outer/url?id=26714821.mp3",
-          pic:
-            "http://p4.music.126.net/H9HJibEzTL34aIT6nsqKsQ==/5682276092402519.jpg",
+          pic: "http://p4.music.126.net/H9HJibEzTL34aIT6nsqKsQ==/5682276092402519.jpg",
         },
       ],
       carousel: [
@@ -162,36 +154,28 @@ export default {
             { count: 58, days: "02-09" },
             { count: 17, days: "02-10" },
             { count: 10, days: "02-11" },
-            { count: 13, days: "02-12" },
-            { count: 21, days: "02-13" },
-            { count: 24, days: "02-14" },
-            { count: 27, days: "02-15" },
-            { count: 32, days: "02-16" },
-            { count: 25, days: "02-17" },
-            { count: 56, days: "02-18" },
-            { count: 58, days: "02-19" },
+            { count: 20, days: "02-12" },
+            { count: 23, days: "02-13" },
+            { count: 21, days: "02-14" },
+            { count: 18, days: "02-15" },
           ],
           me: [
-            { count: 54, days: "01-31" },
-            { count: 84, days: "02-01" },
+            { count: 50, days: "01-31" },
+            { count: 74, days: "02-01" },
             { count: 87, days: "02-02" },
-            { count: 113, days: "02-03" },
-            { count: 71, days: "02-04" },
-            { count: 59, days: "02-05" },
-            { count: 46, days: "02-06" },
+            { count: 103, days: "02-03" },
+            { count: 61, days: "02-04" },
+            { count: 55, days: "02-05" },
+            { count: 42, days: "02-06" },
             { count: 57, days: "02-07" },
-            { count: 55, days: "02-08" },
-            { count: 57, days: "02-09" },
-            { count: 17, days: "02-10" },
+            { count: 51, days: "02-08" },
+            { count: 52, days: "02-09" },
+            { count: 12, days: "02-10" },
             { count: 10, days: "02-11" },
-            { count: 13, days: "02-12" },
-            { count: 21, days: "02-13" },
-            { count: 24, days: "02-14" },
-            { count: 27, days: "02-15" },
-            { count: 32, days: "02-16" },
-            { count: 25, days: "02-17" },
-            { count: 56, days: "02-18" },
-            { count: 58, days: "02-19" },
+            { count: 10, days: "02-12" },
+            { count: 20, days: "02-13" },
+            { count: 15, days: "02-14" },
+            { count: 10, days: "02-15" },
           ],
         },
       };
